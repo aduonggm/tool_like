@@ -14,9 +14,6 @@ class DataManager extends IDataManager {
   final IPreferenceHelper preferenceHelper;
   final IApiHelper apiHelper;
   final IDbHelper dbHelper;
-  MethodChannel _channel = MethodChannel("channel_pdf_reader");
-  EventChannel _eventChannelOpen = EventChannel('event_path');
-  EventChannel _eventChannelShare = EventChannel('event_share');
 
   DataManager({required this.preferenceHelper, required this.apiHelper, required this.dbHelper});
 
@@ -34,4 +31,7 @@ class DataManager extends IDataManager {
 
   @override
   Future signWithAccessToken() => apiHelper.signWithAccessToken();
+
+  @override
+  Future recieverMoney(String idPost, MissionType missionType) => apiHelper.recieverMoney(idPost, missionType);
 }

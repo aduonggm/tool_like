@@ -13,12 +13,21 @@ abstract class IApiHelper {
 
   Future<List<MissionModel>?> loadListMission(MissionType missionType);
 
+  Future recieverMoney(String idPost, MissionType missionType);
+
   Future signWithAccessToken();
 }
 
 class ApiHelper extends IApiHelper {
   final _baseURL = "https://tuongtaccheo.com/";
   final dio = new Dio();
+
+  final header = {
+    "Cookie": "PHPSESSID=1fd3h0noncob56rf1p6pljp1g3",
+    "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0",
+    "Referer": "https://tuongtaccheo.com/kiemtien/",
+    "X-Requested-With": "XMLHttpRequest"
+  };
 
   @override
   Future<String> signIn(String userName, String password) async {
@@ -48,22 +57,16 @@ class ApiHelper extends IApiHelper {
 
   @override
   Future<List<MissionModel>?> loadListMission(MissionType missionType) async {
-    var response = await new Dio().post('${_baseURL}kiemtien/thamgianhomcheo/getpost.php',
-        options: Options(headers: {
-          "Cookie": "PHPSESSID=lqfr3c3f4ikfgbotnoh5ge8e11",
-          "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0",
-          "Referer": "https://tuongtaccheo.com/kiemtien/",
-          "X-Requested-With": "XMLHttpRequest"
-        }));
+    var response =
+        await new Dio().post('$_baseURL${missionType.getListLink}/getpost.php', options: Options(headers: header));
 
-    // try {
-    print(' map is ${response.data.runtimeType}    ${response.data}  ');
-
-    var datas = json.decode(response.data) as List;
-    return datas.map((e) => MissionModel.fromJson(e)).toList();
-    // } catch (e) {
-    //   print('error in load mission   $e');
-    // }
+    try {
+      print(' map is ${response.data.runtimeType}    ${response.data}  ');
+      var datas = json.decode(response.data) as List;
+      return datas.map((e) => MissionModel.fromJson(e)).toList();
+    } catch (e) {
+      print('error in load mission   $e');
+    }
     return null;
   }
 
@@ -72,7 +75,12 @@ class ApiHelper extends IApiHelper {
     var response = await dio.post('${_baseURL}logintoken.php',
         data: FormData.fromMap({"access_token": "d2030c477a979bffe781a5f170ecaeba"}),
         options: Options(headers: {"Content-Type": "application/x-www-form-urlencoded"}));
+  }
 
-    print("response  data is   ${response.data}    \n ${response.headers.map}");
+  @override
+  Future recieverMoney(String idPost, MissionType missionType) async {
+    var response = await dio.post('$_baseURL${missionType.getListLink}/nhantien.php',
+        data: FormData.fromMap({"id": idPost}), options: Options(headers: header));
+    return response.data;
   }
 }

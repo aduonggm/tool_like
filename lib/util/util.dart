@@ -14,7 +14,7 @@ enum MissionType {
   LikeFb,
   CamXucFb,
   CamXucBinhLuan,
-  BinhLuan,
+  CommentFB,
   TheoDoi,
   Share,
   LikePage,
@@ -34,7 +34,7 @@ extension GetInfo on MissionType {
         return "Cảm xúc chéo";
       case MissionType.CamXucBinhLuan:
         return "Cảm xúc chéo bình luận ";
-      case MissionType.BinhLuan:
+      case MissionType.CommentFB:
         return "Bình luận chéo ";
       case MissionType.TheoDoi:
         return "Theo dõi chéo ";
@@ -53,39 +53,39 @@ extension GetInfo on MissionType {
       case MissionType.FollowTT:
         return "Follow chéo TT";
       default:
-        return "";
+        return "Bình luận FB";
     }
   }
-}
 
-String getTitle(MissionType missionType) {
-  switch (missionType) {
-    case MissionType.LikeFb:
-      return "Like Chéo";
-    case MissionType.CamXucFb:
-      return "Cảm xúc chéo";
-    case MissionType.CamXucBinhLuan:
-      return "Cảm xúc chéo bình luận ";
-    case MissionType.BinhLuan:
-      return "Bình luận chéo ";
-    case MissionType.TheoDoi:
-      return "Theo dõi chéo ";
-    case MissionType.Share:
-      return "Chia sẻ chéo ";
-    case MissionType.LikePage:
-      return "Like page chéo ";
-    case MissionType.Join:
-      return "Tham gia nhóm chéo ";
-    case MissionType.Rate:
-      return "Đánh giá page chéo ";
-    case MissionType.TymTT:
-      return "Tim chéo TT";
-    case MissionType.CommentTT:
-      return "Bình luận chéo TT";
-    case MissionType.FollowTT:
-      return "Follow chéo TT";
-    default:
-      return "";
+  String get getListLink {
+    switch (this) {
+      case MissionType.LikeFb:
+        return "kiemtien";
+      case MissionType.CamXucFb:
+        return "kiemtien/camxuccheo";
+      case MissionType.CamXucBinhLuan:
+        return "kiemtien/camxuccheobinhluan";
+      case MissionType.CommentFB:
+        return "kiemtien/cmtcheo";
+      case MissionType.TheoDoi:
+        return "kiemtien/subcheo";
+      case MissionType.Share:
+        return "kiemtien/sharecheo";
+      case MissionType.LikePage:
+        return "kiemtien/likepagecheo";
+      case MissionType.Join:
+        return "kiemtien/thamgianhomcheo";
+      case MissionType.Rate:
+        return "kiemtien/danhgiapage";
+      case MissionType.TymTT:
+        return "tiktok/kiemtien";
+      case MissionType.CommentTT:
+        return "tiktok/kiemtien/cmtcheo";
+      case MissionType.FollowTT:
+        return "tiktok/kiemtien/subcheo";
+      default:
+        return "";
+    }
   }
 }
 

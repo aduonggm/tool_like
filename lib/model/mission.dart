@@ -9,6 +9,6 @@ class MissionModel {
 
   MissionModel.fromJson(dynamic map)
       : idPost = map['idpost'],
-        content = map['nd'] == null ? null : json.decode(map['nd']) as List<String>,
+        content = map['nd'] == null ? null : json.decode(map['nd']).map<String>((e) => e.toString()).toList(),
         link = map['link'];
 }
