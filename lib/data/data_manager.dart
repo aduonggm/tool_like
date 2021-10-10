@@ -2,11 +2,13 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:tool_tang_tuong_tac/model/mission.dart';
+import 'package:tool_tang_tuong_tac/model/nhiem_vu_da_mua.dart';
 import 'package:tool_tang_tuong_tac/util/util.dart';
 
 import 'api_helper.dart';
 import 'db_helper.dart';
 import 'preference_helper.dart';
+import 'package:tool_tang_tuong_tac/model/mission_type.dart';
 
 abstract class IDataManager implements IPreferenceHelper, IDbHelper, IApiHelper {}
 
@@ -34,4 +36,5 @@ class DataManager extends IDataManager {
 
   @override
   Future recieverMoney(String idPost, MissionType missionType) => apiHelper.recieverMoney(idPost, missionType);
+
 }

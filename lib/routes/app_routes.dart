@@ -6,6 +6,7 @@ abstract class Routes {
   static const SIGN_UP = '/sign_up';
 
   static const MISSION = '/mission';
+  static const WEBVIEW = '/webview';
 
   static Future<dynamic> nextScreen({@required screenName, dynamic argument}) async {
     return await Get.toNamed(Get.currentRoute + screenName, arguments: argument);

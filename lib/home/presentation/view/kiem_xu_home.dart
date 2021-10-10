@@ -3,33 +3,30 @@ import 'package:get/get.dart';
 import 'package:tool_tang_tuong_tac/routes/app_pages.dart';
 import 'package:tool_tang_tuong_tac/util/common_widget.dart';
 import 'package:tool_tang_tuong_tac/util/util.dart';
+import 'package:tool_tang_tuong_tac/model/mission_type.dart';
 
-class KiemXuView extends StatelessWidget {
+
+abstract class BuildContent {
+  String get buildTitle;
+
+  String buildNameItem(MissionType missionType);
+
+  buildClickAction(MissionType missionType);
+}
+
+class KiemXuView extends StatelessWidget implements BuildContent {
   const KiemXuView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        AppBar(title: Text('Kiếm xu')),
+        AppBar(title: Text(buildTitle)),
         Expanded(
           child: overScrollView(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  _item(missionType: MissionType.LikeFb),
-                  _item(missionType: MissionType.CamXucFb),
-                  _item(missionType: MissionType.CamXucBinhLuan),
-                  _item(missionType: MissionType.CommentFB),
-                  _item(missionType: MissionType.TheoDoi),
-                  _item(missionType: MissionType.Share),
-                  _item(missionType: MissionType.LikePage),
-                  _item(missionType: MissionType.Rate),
-                  _item(missionType: MissionType.TymTT),
-                  _item(missionType: MissionType.CommentTT),
-                  _item(missionType: MissionType.FollowTT),
-                ],
-              ),
+            child: ListView.builder(
+              itemBuilder: (context, index) => _item(missionType: MissionType.values[index]),
+              itemCount: MissionType.values.length,
             ),
           ),
         )
@@ -39,64 +36,23 @@ class KiemXuView extends StatelessWidget {
 
   _item({required MissionType missionType}) {
     return ListTile(
-      onTap: () {
-        Get.toNamed("${Get.currentRoute}${Routes.MISSION}", arguments: missionType);
-      },
-      title: Text(missionType.getTitle),
-      leading: Image.asset('assets/icons/${getImage(missionType)}.png', width: 24),
-      trailing: Image.asset('assets/icons/${getTrailing(missionType)}.png', width: 24),
+      onTap: () => buildClickAction(missionType),
+      title: Text(buildNameItem(missionType)),
+      leading: Image.asset('assets/icons/${missionType.getImageName}.png', width: 24),
+      trailing: Image.asset('assets/icons/${missionType.getTrailingImage}.png', width: 24),
     );
   }
 
-  String getImage(MissionType missionType) {
-    switch (missionType) {
-      case MissionType.LikeFb:
-        return "like";
-      case MissionType.CamXucFb:
-        return "heart";
-      case MissionType.CamXucBinhLuan:
-        return "heart";
-      case MissionType.CommentFB:
-        return "comment";
-      case MissionType.TheoDoi:
-        return "follow";
-      case MissionType.Share:
-        return "share";
-      case MissionType.LikePage:
-        return "like";
-      case MissionType.Join:
-        return "join";
-      case MissionType.Rate:
-        return "star";
-      case MissionType.TymTT:
-        return "heart";
-      case MissionType.CommentTT:
-        return "comment";
-      case MissionType.FollowTT:
-        return "follow";
-      default:
-        return "";
-    }
+  @override
+  buildClickAction(MissionType missionType) {
+    Get.toNamed("${Get.currentRoute}${Routes.MISSION}", arguments: missionType);
   }
 
-  String getTrailing(MissionType missionType) {
-    switch (missionType) {
-      case MissionType.LikeFb:
-      case MissionType.CamXucFb:
-      case MissionType.CamXucBinhLuan:
-      case MissionType.CommentFB:
-      case MissionType.TheoDoi:
-      case MissionType.Share:
-      case MissionType.LikePage:
-      case MissionType.Join:
-      case MissionType.Rate:
-        return "face_book";
-      case MissionType.TymTT:
-      case MissionType.CommentTT:
-      case MissionType.FollowTT:
-        return "tik_tok";
-      default:
-        return "";
-    }
+  @override
+  String buildNameItem(MissionType missionType) {
+    return missionType.getName;
   }
+
+  @override
+  String get buildTitle => 'Kiếm xu';
 }

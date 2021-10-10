@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:tool_tang_tuong_tac/home/presentation/controller/mission_controller.dart';
 import 'package:tool_tang_tuong_tac/util/common_widget.dart';
 import 'package:tool_tang_tuong_tac/util/util.dart';
+import 'package:tool_tang_tuong_tac/model/mission_type.dart';
 
 class MissionView extends GetView<MissionController> {
   @override
@@ -11,7 +12,7 @@ class MissionView extends GetView<MissionController> {
     controller.loadMission(mission);
     return Scaffold(
       appBar: AppBar(
-        title: Text(mission.getTitle),
+        title: Text(mission.getName),
       ),
       body: Obx(() => controller.loadError.value
           ? Center(child: Text('Không thể tải nhiệm vụ'))

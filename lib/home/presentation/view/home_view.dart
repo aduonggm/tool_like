@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tool_tang_tuong_tac/home/presentation/controller/home_controller.dart';
 import 'package:tool_tang_tuong_tac/home/presentation/view/kiem_xu_home.dart';
+import 'package:tool_tang_tuong_tac/home/presentation/view/tang_tuong_tac_view.dart';
+
+import 'webview_with_link.dart';
 
 class HomeView extends GetView<HomeController> {
-  final views = <Widget>[KiemXuView(), KiemXuView(), KiemXuView(), KiemXuView()];
+  final views = <Widget>[KiemXuView(), TangTuongTacView(), MyWebView(), KiemXuView()];
 
   @override
   Widget build(BuildContext context) {

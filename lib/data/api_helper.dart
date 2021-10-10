@@ -1,6 +1,9 @@
 import 'dart:convert';
-import 'dart:io';
-import 'dart:typed_data';
+
+import 'package:http/http.dart' as http;
+import 'package:html/parser.dart' as parser;
+import 'package:html/dom.dart' as dom;
+import 'package:tool_tang_tuong_tac/model/mission_type.dart';
 
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
@@ -23,7 +26,7 @@ class ApiHelper extends IApiHelper {
   final dio = new Dio();
 
   final header = {
-    "Cookie": "PHPSESSID=1fd3h0noncob56rf1p6pljp1g3",
+    "Cookie": "PHPSESSID=kp79qqilt8iq0hl4bf48a4sm40",
     "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0",
     "Referer": "https://tuongtaccheo.com/kiemtien/",
     "X-Requested-With": "XMLHttpRequest"

@@ -39,6 +39,8 @@ dependencies:
   shared_preferences: ^2.0.8
   sqflite: ^2.0.0+3
   url_launcher: ^6.0.6
+  http: ^0.13.4
+  html: ^0.15.0
 
 
 dev_dependencies:
