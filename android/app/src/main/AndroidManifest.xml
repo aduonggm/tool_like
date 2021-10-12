@@ -4,6 +4,8 @@
 
     <application
         android:label="tool_tang_tuong_tac"
+        android:usesCleartextTraffic="true"
+
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

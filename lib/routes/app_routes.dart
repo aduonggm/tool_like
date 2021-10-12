@@ -6,7 +6,7 @@ abstract class Routes {
   static const SIGN_UP = '/sign_up';
 
   static const MISSION = '/mission';
-  static const WEBVIEW = '/webview';
+  static const TANGLIKEVIEW = '/tanglike';
 
   static Future<dynamic> nextScreen({@required screenName, dynamic argument}) async {
     return await Get.toNamed(Get.currentRoute + screenName, arguments: argument);
@@ -14,10 +14,6 @@ abstract class Routes {
 
   static Future<dynamic> popScreen({@required screenName, dynamic argument}) async {
     return await Get.toNamed(screenName, arguments: argument);
-  }
-
-  static Future toUpgradeView() async {
-    // return await Get.toNamed(UPGRADE_VIEW);
   }
 
   static void back({dynamic result}) {

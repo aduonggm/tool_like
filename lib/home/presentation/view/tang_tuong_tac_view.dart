@@ -7,9 +7,9 @@ import 'package:tool_tang_tuong_tac/util/util.dart';
 class TangTuongTacView extends KiemXuView {
   @override
   buildClickAction(MissionType missionType) {
-    Get.toNamed("${Get.currentRoute}${Routes.WEBVIEW}", arguments: {
+    Get.toNamed("${Get.currentRoute}${Routes.TANGLIKEVIEW}", arguments: {
       "link": 'https://tuongtaccheo.com/${missionType.getLinkTangLike}',
-      'cookie': 'PHPSESSID=kp79qqilt8iq0hl4bf48a4sm40'
+      'cookie': controller.cookie,
     });
   }
 

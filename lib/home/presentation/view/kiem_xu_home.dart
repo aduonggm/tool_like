@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tool_tang_tuong_tac/home/presentation/controller/home_controller.dart';
 import 'package:tool_tang_tuong_tac/routes/app_pages.dart';
 import 'package:tool_tang_tuong_tac/util/common_widget.dart';
 import 'package:tool_tang_tuong_tac/util/util.dart';
@@ -14,7 +15,7 @@ abstract class BuildContent {
   buildClickAction(MissionType missionType);
 }
 
-class KiemXuView extends StatelessWidget implements BuildContent {
+class KiemXuView extends GetView<HomeController> implements BuildContent {
   const KiemXuView({Key? key}) : super(key: key);
 
   @override

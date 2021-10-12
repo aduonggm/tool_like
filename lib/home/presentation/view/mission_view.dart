@@ -14,8 +14,8 @@ class MissionView extends GetView<MissionController> {
       appBar: AppBar(
         title: Text(mission.getName),
       ),
-      body: Obx(() => controller.loadError.value
-          ? Center(child: Text('Không thể tải nhiệm vụ'))
+      body: Obx(() => controller.loadError.value != 0
+          ? Center(child: Text(controller.loadError.value == -1 ? 'Không thể tải nhiệm vụ' : 'Đã hết nhiệm vụ'))
           : controller.missionList.isEmpty
               ? Center(child: CircularProgressIndicator())
               : RefreshIndicator(

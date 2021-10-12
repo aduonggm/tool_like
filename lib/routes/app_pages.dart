@@ -7,7 +7,8 @@ import 'package:tool_tang_tuong_tac/home/presentation/view/home_view.dart';
 import 'package:tool_tang_tuong_tac/home/presentation/view/mission_view.dart';
 import 'package:tool_tang_tuong_tac/home/presentation/view/sign_in_view.dart';
 import 'package:tool_tang_tuong_tac/home/presentation/view/sign_up_view.dart';
-import 'package:tool_tang_tuong_tac/home/presentation/view/webview_with_link.dart';
+import 'package:tool_tang_tuong_tac/home/presentation/view/tang_like_view.dart';
+import 'package:tool_tang_tuong_tac/home/presentation/view/webview.dart';
 
 part 'app_routes.dart';
 
@@ -35,8 +36,8 @@ class AppPages {
           binding: MissionBinding(),
         ),
         GetPage(
-          name: Routes.WEBVIEW,
-          page: () => MyWebView(),
+          name: Routes.TANGLIKEVIEW,
+          page: () => TangLikeView(),
         ),
       ],
     )

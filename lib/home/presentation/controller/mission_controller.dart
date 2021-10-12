@@ -9,7 +9,7 @@ import 'package:tool_tang_tuong_tac/model/mission_type.dart';
 
 class MissionController extends BaseTabController {
   final IDataManager iDataManager;
-  RxBool loadError = false.obs;
+  RxInt loadError = 0.obs;
   late MissionType missionType;
 
   MissionController(this.iDataManager) : super(iDataManager);
@@ -25,9 +25,14 @@ class MissionController extends BaseTabController {
     this.missionType = missionType;
     var result = await dataManager.loadListMission(missionType);
     print(' result is  $result');
-    if (result == null || result.isEmpty) {
+
+    if (result == null) {
       print(' result is  $result');
-      loadError.value = true;
+      loadError.value = -1;
+      return;
+    }
+    if (result.isEmpty) {
+      loadError.value = 1;
       return;
     }
     missionList.addAll(result);

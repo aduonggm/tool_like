@@ -4,10 +4,15 @@ import 'package:tool_tang_tuong_tac/home/presentation/controller/home_controller
 import 'package:tool_tang_tuong_tac/home/presentation/view/kiem_xu_home.dart';
 import 'package:tool_tang_tuong_tac/home/presentation/view/tang_tuong_tac_view.dart';
 
-import 'webview_with_link.dart';
+import 'webview.dart';
 
 class HomeView extends GetView<HomeController> {
-  final views = <Widget>[KiemXuView(), TangTuongTacView(), MyWebView(), KiemXuView()];
+  late final List<Widget> views = <Widget>[
+    KiemXuView(),
+    TangTuongTacView(),
+    MyWebView(link: 'https://tuongtaccheo.com/cauhinh/', cookie: controller.cookie),
+    KiemXuView()
+  ];
 
   @override
   Widget build(BuildContext context) {

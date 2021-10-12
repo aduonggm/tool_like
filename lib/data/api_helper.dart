@@ -26,9 +26,8 @@ class ApiHelper extends IApiHelper {
   final dio = new Dio();
 
   final header = {
-    "Cookie": "PHPSESSID=kp79qqilt8iq0hl4bf48a4sm40",
+    "Cookie": "PHPSESSID=pf7hbgu4ee780j680249lsl726",
     "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0",
-    "Referer": "https://tuongtaccheo.com/kiemtien/",
     "X-Requested-With": "XMLHttpRequest"
   };
 
@@ -61,10 +60,10 @@ class ApiHelper extends IApiHelper {
   @override
   Future<List<MissionModel>?> loadListMission(MissionType missionType) async {
     var response =
-        await new Dio().post('$_baseURL${missionType.getListLink}/getpost.php', options: Options(headers: header));
+        await new Dio().get('$_baseURL${missionType.getListLink}/getpost.php', options: Options(headers: header));
 
     try {
-      print(' map is ${response.data.runtimeType}    ${response.data}  ');
+      print(' map is ${'$_baseURL${missionType.getListLink}/getpost.php'}   ${response.data.runtimeType}    ${response.data}  ');
       var datas = json.decode(response.data) as List;
       return datas.map((e) => MissionModel.fromJson(e)).toList();
     } catch (e) {
