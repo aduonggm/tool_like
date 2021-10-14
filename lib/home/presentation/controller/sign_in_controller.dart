@@ -25,13 +25,12 @@ class SignInController extends BaseTabController {
   }
 
   void singIn() async {
-    dataManager.signWithAccessToken();
-    // print(' controller is null   ${inAppWebViewController == null}');
-    // if (userName.isEmpty || password.isEmpty) return;
-    // CookieManager.instance().deleteAllCookies();
-    // var postData = Uint8List.fromList(utf8.encode("username=$userName&password=$password&submit=ĐĂNG NHẬP"));
-    // inAppWebViewController?.postUrl(url: Uri.parse("https://tuongtaccheo.com/login.php"), postData: postData);
-    // showAwaitDialog();
+    print(' controller is null   ${inAppWebViewController == null}');
+    if (userName.isEmpty || password.isEmpty) return;
+    CookieManager.instance().deleteAllCookies();
+    var postData = Uint8List.fromList(utf8.encode("username=$userName&password=$password&submit=ĐĂNG NHẬP"));
+    inAppWebViewController?.postUrl(url: Uri.parse("https://tuongtaccheo.com/login.php"), postData: postData);
+    showAwaitDialog();
   }
 
   saveData(String accessToken) async {
@@ -44,7 +43,7 @@ class SignInController extends BaseTabController {
     dataManager.saveUser(userModel);
     var cookieManager = CookieManager.instance();
     var cookie = await cookieManager.getCookie(url: Uri.parse("https://tuongtaccheo.com/"),name: "PHPSESSID");
-    dataManager.cookie = cookie;
+    dataManager.setCookie(cookie!);
     Get.offAllNamed(Routes.HOME);
   }
 

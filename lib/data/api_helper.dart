@@ -1,16 +1,9 @@
 import 'dart:convert';
-import 'dart:io';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-
-import 'package:http/http.dart' as http;
-import 'package:html/parser.dart' as parser;
-import 'package:html/dom.dart' as dom;
-import 'package:tool_tang_tuong_tac/model/mission_type.dart';
 
 import 'package:dio/dio.dart';
-
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:tool_tang_tuong_tac/model/mission.dart';
-import 'package:tool_tang_tuong_tac/util/util.dart';
+import 'package:tool_tang_tuong_tac/model/mission_type.dart';
 
 abstract class IApiHelper {
   Future<String> signIn(String userName, String password);
@@ -72,11 +65,9 @@ class ApiHelper extends IApiHelper {
     var response = await dio.post('${_baseURL}logintoken.php',
         data: FormData.fromMap({"access_token": "d2030c477a979bffe781a5f170ecaeba"}),
         options: Options(headers: {"Content-Type": "application/x-www-form-urlencoded"}));
-
-    var result = await http.post(Uri.parse('${_baseURL}logintoken.php'),
-        body: {'access_token': 'd2030c477a979bffe781a5f170ecaeba'}, headers: {"Content-Type": "application/x-www-form-urlencoded"});
-
-    print('header is   ${result.headers}');
+    var cookie = response.headers.map['set-cookie']?.first;
+    if (cookie != null) header['Cookie'] = response.headers.map['set-cookie']!.first;
+    return cookie != null;
   }
 
   @override

@@ -49,7 +49,7 @@ class SignInView extends GetView<SignInController> {
                         )),
                     Spacer(),
                     SizedBox(
-                      height: 1,
+                      height: 400,
                       child: InAppWebView(
                         onWebViewCreated: (controller) => this.controller.inAppWebViewController = controller,
                         onLoadStop: (controller, url) async {
@@ -57,9 +57,11 @@ class SignInView extends GetView<SignInController> {
                             this.controller.errorSignIn();
                           }
                           if (url.toString() == 'https://tuongtaccheo.com/home.php') {
+                            print('load api');
                             controller.loadUrl(urlRequest: URLRequest(url: Uri.parse('https://tuongtaccheo.com/api/')));
                           }
                           if (url.toString() == 'https://tuongtaccheo.com/api/') {
+                            print('load api 1 ');
                             var value = await controller.evaluateJavascript(source: "document.getElementsByClassName('form-control')[0].value;");
                             this.controller.saveData(value);
                           }

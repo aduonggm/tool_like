@@ -9,10 +9,7 @@ import 'api_helper.dart';
 import 'db_helper.dart';
 import 'preference_helper.dart';
 
-abstract class IDataManager implements IPreferenceHelper, IDbHelper, IApiHelper {
-  Cookie? cookie;
-
-}
+abstract class IDataManager implements IPreferenceHelper, IDbHelper, IApiHelper {}
 
 class DataManager extends IDataManager {
   final IPreferenceHelper preferenceHelper;
