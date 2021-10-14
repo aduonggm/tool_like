@@ -1,16 +1,18 @@
 import 'dart:async';
 
-import 'package:flutter/services.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:tool_tang_tuong_tac/model/mission.dart';
-import 'package:tool_tang_tuong_tac/model/nhiem_vu_da_mua.dart';
-import 'package:tool_tang_tuong_tac/util/util.dart';
+import 'package:tool_tang_tuong_tac/model/mission_type.dart';
+import 'package:tool_tang_tuong_tac/model/user_model.dart';
 
 import 'api_helper.dart';
 import 'db_helper.dart';
 import 'preference_helper.dart';
-import 'package:tool_tang_tuong_tac/model/mission_type.dart';
 
-abstract class IDataManager implements IPreferenceHelper, IDbHelper, IApiHelper {}
+abstract class IDataManager implements IPreferenceHelper, IDbHelper, IApiHelper {
+  Cookie? cookie;
+
+}
 
 class DataManager extends IDataManager {
   final IPreferenceHelper preferenceHelper;
@@ -35,6 +37,14 @@ class DataManager extends IDataManager {
   Future signWithAccessToken() => apiHelper.signWithAccessToken();
 
   @override
-  Future recieverMoney(String idPost, MissionType missionType) => apiHelper.recieverMoney(idPost, missionType);
+  Future receiverMoney(String idPost, MissionType missionType) => apiHelper.receiverMoney(idPost, missionType);
 
+  @override
+  Future<UserModel?> getUser() => preferenceHelper.getUser();
+
+  @override
+  Future<bool> saveUser(UserModel userModel) => preferenceHelper.saveUser(userModel);
+
+  @override
+   setCookie(Cookie cookie) => apiHelper.setCookie(cookie);
 }

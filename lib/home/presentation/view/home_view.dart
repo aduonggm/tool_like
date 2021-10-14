@@ -8,16 +8,19 @@ import 'webview.dart';
 
 class HomeView extends GetView<HomeController> {
   late final List<Widget> views = <Widget>[
-    KiemXuView(),
-    TangTuongTacView(),
-    MyWebView(link: 'https://tuongtaccheo.com/cauhinh/', cookie: controller.cookie),
-    KiemXuView()
+    KiemXuView(key: PageStorageKey('kiem xy')),
+    TangTuongTacView(key: PageStorageKey('kiem xys')),
+    MyWebView(link: 'https://tuongtaccheo.com/cauhinh/', cookie: controller.cookie, key: PageStorageKey('kiem xyss')),
   ];
+
+  PageStorageBucket pageStorageBucket = PageStorageBucket();
+
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
-      body: SafeArea(child: Obx(() => views[controller.indexPage.value])),
+      body: Obx(() =>PageStorage(bucket: pageStorageBucket, child:  views[controller.indexPage.value])),
       bottomNavigationBar: Obx(() => BottomNavigationBar(
             currentIndex: controller.indexPage.value,
             selectedItemColor: Colors.blue,
@@ -25,9 +28,8 @@ class HomeView extends GetView<HomeController> {
             showUnselectedLabels: true,
             items: [
               BottomNavigationBarItem(icon: Icon(Icons.home), label: "Kiếm Xu"),
-              BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-              BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-              BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+              BottomNavigationBarItem(icon: Icon(Icons.bar_chart), label: "Tăng Like"),
+              BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Cài đặt"),
             ],
             onTap: (value) => controller.indexPage.value = value,
           )),

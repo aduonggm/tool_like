@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -24,36 +25,34 @@ class SignInController extends BaseTabController {
   }
 
   void singIn() async {
-    // if (password.isEmpty || userName.isEmpty) return;
+    dataManager.signWithAccessToken();
+    // print(' controller is null   ${inAppWebViewController == null}');
+    // if (userName.isEmpty || password.isEmpty) return;
     // CookieManager.instance().deleteAllCookies();
+    // var postData = Uint8List.fromList(utf8.encode("username=$userName&password=$password&submit=ĐĂNG NHẬP"));
+    // inAppWebViewController?.postUrl(url: Uri.parse("https://tuongtaccheo.com/login.php"), postData: postData);
     // showAwaitDialog();
-    // var cookie = await dataManager.signIn('duongnv', 'airoiCungkhac');
-    // dismissOverlay();
-    // if (cookie.isEmpty) {
-    //   toast('Đăng nhập lỗi');
-    //   return;
-    // }
+  }
 
-    Get.offAndToNamed(Routes.HOME);
+  saveData(String accessToken) async {
+    dismissOverlay();
+    if (accessToken.isEmpty) {
+      toast('Vui lòng kiểm tra lại kết nối mạng');
+      return;
+    }
+    UserModel userModel = UserModel(userName, password, accessToken);
+    dataManager.saveUser(userModel);
+    var cookieManager = CookieManager.instance();
+    var cookie = await cookieManager.getCookie(url: Uri.parse("https://tuongtaccheo.com/"),name: "PHPSESSID");
+    dataManager.cookie = cookie;
+    Get.offAllNamed(Routes.HOME);
   }
 
   switchPasswordVisibility() {
     visibilityPassword.value = !visibilityPassword.value;
   }
 
-  errorSignIn() {
+  void errorSignIn() {
     dismissOverlay();
-    toast('log in error');
-  }
-
-  void signInDone(String? result) {
-    if (result == null || result.isEmpty) {
-      errorSignIn();
-      return;
-    }
-    dismissOverlay();
-    UserModel userModel = UserModel(userName, password);
-    userModel.accessToken = result;
-    toast(' log in success');
   }
 }

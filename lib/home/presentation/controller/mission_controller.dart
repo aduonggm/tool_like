@@ -58,7 +58,7 @@ class MissionController extends BaseTabController {
       toast('luanch response  $laun');
     } else {
       recievered.add(idPost);
-      var result = await dataManager.recieverMoney(idPost, missionType);
+      var result = await dataManager.receiverMoney(idPost, missionType);
       toast(result.toString());
     }
   }

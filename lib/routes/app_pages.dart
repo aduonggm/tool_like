@@ -13,7 +13,7 @@ import 'package:tool_tang_tuong_tac/home/presentation/view/webview.dart';
 part 'app_routes.dart';
 
 class AppPages {
-  static const INITIAL = Routes.HOME;
+  static const INITIAL = Routes.SIGN_IN;
 
   static final routes = [
     GetPage(

@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
@@ -8,6 +6,7 @@ import 'package:tool_tang_tuong_tac/util/common_widget.dart';
 
 class SignInView extends GetView<SignInController> {
   final globalKey = GlobalKey<FormState>();
+
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +48,28 @@ class SignInView extends GetView<SignInController> {
                           style: Get.textTheme.headline6?.copyWith(color: Colors.white),
                         )),
                     Spacer(),
+                    SizedBox(
+                      height: 1,
+                      child: InAppWebView(
+                        onWebViewCreated: (controller) => this.controller.inAppWebViewController = controller,
+                        onLoadStop: (controller, url) async {
+                          if (url.toString() == "https://tuongtaccheo.com/index.php") {
+                            this.controller.errorSignIn();
+                          }
+                          if (url.toString() == 'https://tuongtaccheo.com/home.php') {
+                            controller.loadUrl(urlRequest: URLRequest(url: Uri.parse('https://tuongtaccheo.com/api/')));
+                          }
+                          if (url.toString() == 'https://tuongtaccheo.com/api/') {
+                            var value = await controller.evaluateJavascript(source: "document.getElementsByClassName('form-control')[0].value;");
+                            this.controller.saveData(value);
+                          }
+                          print('load stop is ${(url.toString() == 'https://tuongtaccheo.com/home.php')}  ${url.toString()}');
+                        },
+                        onLoadError: (controller, url, code, message) {
+                          print('load error   $message   ${url.toString()}');
+                        },
+                      ),
+                    )
                   ],
                 )),
           ),
