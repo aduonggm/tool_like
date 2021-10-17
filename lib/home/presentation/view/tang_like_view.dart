@@ -9,10 +9,9 @@ class TangLikeView extends StatelessWidget {
   Widget build(BuildContext context) {
     var arg = Get.arguments;
     var link = arg['link'] as String;
-    var cookie = arg['cookie'] as String;
 
     return Scaffold(
-      body: MyWebView(link: link, cookie: cookie),
+      body: SafeArea(child: MyWebView(link: link)),
     );
   }
 }

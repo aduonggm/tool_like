@@ -10,7 +10,7 @@ abstract class IPreferenceHelper {
 
   Future<bool> saveUser(UserModel userModel);
 
-  Future<UserModel?> getUser();
+  UserModel? getUser();
 }
 
 class PreferenceHelper implements IPreferenceHelper {
@@ -45,9 +45,10 @@ class PreferenceHelper implements IPreferenceHelper {
   Future<bool> saveUser(UserModel userModel) => _preferences.setString(USER_KEY, json.encode(userModel.toJson()));
 
   @override
-  Future<UserModel?> getUser() async {
+ UserModel? getUser()  {
     var string = _preferences.getString(USER_KEY);
     if (string.isStringEmpty) return null;
+    print('user  save is  $string');
     return UserModel.fromJson(json.decode(string!));
   }
 }

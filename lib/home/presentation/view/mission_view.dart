@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tool_tang_tuong_tac/home/presentation/controller/mission_controller.dart';
-import 'package:tool_tang_tuong_tac/util/common_widget.dart';
-import 'package:tool_tang_tuong_tac/util/util.dart';
 import 'package:tool_tang_tuong_tac/model/mission_type.dart';
+import 'package:tool_tang_tuong_tac/util/common_widget.dart';
 
 class MissionView extends GetView<MissionController> {
   @override
@@ -11,9 +10,7 @@ class MissionView extends GetView<MissionController> {
     var mission = Get.arguments as MissionType;
     controller.loadMission(mission);
     return Scaffold(
-      appBar: AppBar(
-        title: Text(mission.getName),
-      ),
+      appBar: AppBar(title: Text(mission.getName)),
       body: Obx(() => controller.loadError.value != 0
           ? Center(child: Text(controller.loadError.value == -1 ? 'Không thể tải nhiệm vụ' : 'Đã hết nhiệm vụ'))
           : controller.missionList.isEmpty

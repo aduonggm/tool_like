@@ -9,8 +9,8 @@ class UserModel {
 
   UserModel.fromJson(dynamic json)
       : userName = json['user_name'],
-        password = json['passwprd'],
-        accessToken = ['access_token'] as String;
+        password = json['password'],
+        accessToken = json['access_token'];
 
   Map toJson() {
     Map hashMap = Map();

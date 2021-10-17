@@ -40,7 +40,6 @@ class MissionController extends BaseTabController {
 
   @override
   void onInit() {
-    dataManager.signWithAccessToken();
     super.onInit();
   }
 
@@ -54,8 +53,7 @@ class MissionController extends BaseTabController {
       }
       var link = missionList[index].link;
       if (missionType == MissionType.FollowTT) link = 'https://www.tiktok.com/@${missionList[index].link}?lang=vi-VN';
-      var laun = await launch(link);
-      toast('luanch response  $laun');
+      await launch(link);
     } else {
       recievered.add(idPost);
       var result = await dataManager.receiverMoney(idPost, missionType);

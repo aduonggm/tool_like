@@ -26,6 +26,7 @@ class KiemXuView extends GetView<HomeController> implements BuildContent {
         Expanded(
           child: overScrollView(
             child: ListView.builder(
+              padding: EdgeInsets.zero,
               itemBuilder: (context, index) => _item(missionType: MissionType.values[index]),
               itemCount: MissionType.values.length,
             ),

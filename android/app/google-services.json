@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "794079512765",
+    "project_id": "toolautolike",
+    "storage_bucket": "toolautolike.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:794079512765:android:2584c626cb7a7b0858cfd4",
+        "android_client_info": {
+          "package_name": "com.duongnv.autolike"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "794079512765-9d3fivd28av624mq86elejv3q0mt9nlr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAA2fsM526QIB-7hsi5-Ys_Kxo4GQZjKCs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "794079512765-9d3fivd28av624mq86elejv3q0mt9nlr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:794079512765:android:c743ef2ad771fbfb58cfd4",
+        "android_client_info": {
+          "package_name": "com.duongnv.tuongtaccheo.tool_tang_tuong_tac"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "794079512765-9d3fivd28av624mq86elejv3q0mt9nlr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAA2fsM526QIB-7hsi5-Ys_Kxo4GQZjKCs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "794079512765-9d3fivd28av624mq86elejv3q0mt9nlr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

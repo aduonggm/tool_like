@@ -28,7 +28,6 @@ class AppPages {
       name: Routes.HOME,
       page: () => HomeView(),
       binding: HomeBinding(),
-      bindings: [],
       children: [
         GetPage(
           name: Routes.MISSION,

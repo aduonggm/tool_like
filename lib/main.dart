@@ -1,6 +1,5 @@
-import 'package:flutter/foundation.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:tool_tang_tuong_tac/util/util.dart';
 
@@ -12,6 +11,8 @@ import 'routes/app_pages.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
   // if (defaultTargetPlatform == TargetPlatform.android) {
   //   InAppPurchaseAndroidPlatformAddition.enablePendingPurchases();
   // }
@@ -20,13 +21,8 @@ Future<void> main() async {
   await preferenceHelper.initPreference();
   var dbHelper = DbHelper();
   await dbHelper.initDatabase();
-  // await AnalyticSender.initFirebase();
-  // var remoteConfig = await AnalyticSender.setupRemoteConfig();
+  await setupRemoteConfig();
 
-  // if (remoteConfig.getBool("open_app_enable") && !(preferenceHelper.isUpgrade())) {
-  //   OpenAds.instance.initOpenAds(remoteConfig.getString("open_app_id"));
-  // }
-  // AnalyticSender.trackOpenApp();
   runApp(MyApp(preferenceHelper: preferenceHelper, dbHelper: dbHelper));
 }
 
@@ -46,13 +42,15 @@ class MyApp extends StatelessWidget {
             appBarTheme: AppBarTheme(
           backgroundColor: Colors.white,
           iconTheme: IconThemeData(color: Colors.black),
-          titleTextStyle: TextStyle(color: Colors.black),
+          titleTextStyle: TextStyle(
+            color: Colors.black,
+          ),
           textTheme: Get.textTheme,
         )),
         darkTheme: ThemeData.dark(),
         debugShowCheckedModeBanner: false,
         enableLog: true,
-        title: 'Learning Book',
+        title: 'Tăng Like',
         logWriterCallback: Logger.write,
         initialRoute: AppPages.INITIAL,
         getPages: AppPages.routes,

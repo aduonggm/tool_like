@@ -3,6 +3,8 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:device_info/device_info.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -16,13 +18,7 @@ toast(String msg,
     double fontSize = 15,
     Color background = Colors.grey,
     ToastGravity gravity = ToastGravity.BOTTOM}) {
-  Fluttertoast.showToast(
-      msg: msg,
-      toastLength: length,
-      gravity: gravity,
-      textColor: textColor,
-      fontSize: fontSize,
-      backgroundColor: background);
+  Fluttertoast.showToast(msg: msg, toastLength: length, gravity: gravity, textColor: textColor, fontSize: fontSize, backgroundColor: background);
 }
 
 Future<int> checkDeviceSupportDarkMode() async {
@@ -62,8 +58,7 @@ Future<String> getCountryWithBarcode(BuildContext? context, int data) async {
   String name = 'Unknown';
   if (context == null) return name;
   try {
-    var jsonList = jsonDecode(await DefaultAssetBundle.of(context).loadString("assets/json/product_barcode.json"))
-        as List<dynamic>;
+    var jsonList = jsonDecode(await DefaultAssetBundle.of(context).loadString("assets/json/product_barcode.json")) as List<dynamic>;
     for (Map element in jsonList) {
       List<String> number = (element['barcode'] as String).split(' – ');
       if (number.length == 1 && int.parse(number.first.trim()) == data) {
@@ -149,4 +144,19 @@ class BindingObserver extends WidgetsBindingObserver {
         break;
     }
   }
+}
+
+Future<RemoteConfig> setupRemoteConfig() async {
+  final RemoteConfig remoteConfig = RemoteConfig.instance;
+  await remoteConfig.setDefaults(<String, dynamic>{'version': Constants.version,'version_name' : '1.0'});
+
+  remoteConfig
+      .setConfigSettings(RemoteConfigSettings(fetchTimeout: Duration(seconds: 60), minimumFetchInterval: Duration(hours: kReleaseMode ? 12 : 0)));
+  try {
+    remoteConfig.fetchAndActivate();
+  } catch (exception) {
+    print('Unable to fetch remote config. Cached or default values will be '
+        'used');
+  }
+  return remoteConfig;
 }
