@@ -28,6 +28,7 @@ class SignInController extends BaseTabController {
   @override
   void onReady() {
     super.onReady();
+    checkVersion();
   }
 
   void autoSignin() async {

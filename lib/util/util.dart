@@ -148,7 +148,12 @@ class BindingObserver extends WidgetsBindingObserver {
 
 Future<RemoteConfig> setupRemoteConfig() async {
   final RemoteConfig remoteConfig = RemoteConfig.instance;
-  await remoteConfig.setDefaults(<String, dynamic>{'version': Constants.version,'version_name' : '1.0'});
+  await remoteConfig.setDefaults(<String, dynamic>{
+    'version': Constants.version,
+    'version_name': '1.0',
+    'link_app': 'https://drive.google.com/drive/folders/1MyZZ_Et76rFlIvvhUR_cT3-PEd2mtbzo?usp=sharing',
+    'link_page': 'https://www.facebook.com/apptangtuongtac'
+  });
 
   remoteConfig
       .setConfigSettings(RemoteConfigSettings(fetchTimeout: Duration(seconds: 60), minimumFetchInterval: Duration(hours: kReleaseMode ? 12 : 0)));

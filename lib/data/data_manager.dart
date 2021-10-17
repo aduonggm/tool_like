@@ -57,4 +57,7 @@ class DataManager extends IDataManager {
 
   @override
   setCookie(Cookie cookie) => apiHelper.setCookie(cookie);
+
+  @override
+  signout() => preferenceHelper.signout();
 }

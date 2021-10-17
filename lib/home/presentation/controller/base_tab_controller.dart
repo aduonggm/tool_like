@@ -57,8 +57,10 @@ class BaseTabController extends GetxController {
     RemoteConfig remoteConfig = RemoteConfig.instance;
     var version = remoteConfig.getInt('version');
     var versionName = remoteConfig.getString('version_name');
+    var appLink = remoteConfig.getString('link_app');
+    var content = remoteConfig.getString('update_content');
 
-    if (version > Constants.version) showDialogUpdate(versionName);
+    if (version > Constants.version) showDialogUpdate(versionName, appLink, content);
   }
 
   Future showSnackBar({
@@ -69,7 +71,7 @@ class BaseTabController extends GetxController {
     await Get.showSnackbar(GetBar(duration: duration, title: title, message: messages));
   }
 
-  void showDialogUpdate(String versionName) {
+  void showDialogUpdate(String versionName, String applink, String content) {
     showDialog(
       context: Get.overlayContext!,
       barrierDismissible: false,
@@ -92,11 +94,11 @@ class BaseTabController extends GetxController {
                       ],
                     ),
                     space(value: 20),
-                    Text('1. new update đá asdf asdf asdf sadf sdaf\n2. new \n4.ne', style: Get.textTheme.bodyText1),
+                    Text(content, style: Get.textTheme.bodyText1),
                     space(value: 20),
                     Material(
                         child: commonButton(
-                            voidCallback: () =>launch('https://drive.google.com/drive/folders/1MyZZ_Et76rFlIvvhUR_cT3-PEd2mtbzo?usp=sharing'),
+                            voidCallback: () => launch(applink),
                             child: Text(
                               'Cập nhật'.toUpperCase(),
                               style: Get.textTheme.headline6?.copyWith(color: Colors.white),
